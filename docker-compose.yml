@@ -1,0 +1,16 @@
+version: "3.4"
+services:
+
+  app:
+    image: etiennenapoleone/rjsmc:2018
+    labels:
+      - "traefik.frontend.rule=Host:localhost"
+
+  reverse-proxy:
+    image: traefik
+    command: --api --docker
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
